@@ -15,7 +15,6 @@ int main()
 
     change_imagebase(origName, ibName, 0x10800000);
     dump(ibName, dumpName);
-
     
     auto iat_segments = load_iat(iatPath);
     std::cout << "Loaded " << iat_segments.size() << " segments\n";
