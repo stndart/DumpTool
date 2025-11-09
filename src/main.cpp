@@ -1,6 +1,9 @@
 #include "dll_tools.hpp"
 
 #include <iostream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 int main()
 {
@@ -18,5 +21,8 @@ int main()
     std::cout << "Loaded " << iat_segments.size() << " segments\n";
     create_idt(dumpName, outName, iat_segments);
 
+    fs::remove(ibName);
+    fs::remove(dumpName);
+    
     return 0;
 }
