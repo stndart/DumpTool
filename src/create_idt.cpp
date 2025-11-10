@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 // Function to create Import Directory Table (IDT)
 bool create_idt(const string &dll_path, const string &out_path,
                 const vector<IATSegment> &segments) {
@@ -45,16 +44,12 @@ bool create_idt(const string &dll_path, const string &out_path,
           //   import_lib.add_entry(entry.ordinal);
         } else {
           // Handle named imports[citation:1]
-          auto& nentry = import_lib.add_entry(entry.function_name);
+          auto &nentry = import_lib.add_entry(entry.function_name);
           nentry.iat_address(entry.call_addr); // just for LIEF checks
         }
       }
       import_lib.import_address_table_rva(segment[0].call_addr);
     }
-
-    uint32_t dll_char = pe->optional_header().dll_characteristics();
-    dll_char &= ~0x40;
-    pe->optional_header().dll_characteristics(dll_char);
 
     // Build and write with imports configuration[citation:1]
     LIEF::PE::Builder::config_t builder_config;
